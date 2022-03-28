@@ -1,2 +1,3 @@
-public class Airport {
+public class AirPort extends Board{
+    private int ticket = 50;
 }

@@ -1,2 +1,2 @@
-public class BankArea {
+public class BankArea extends Board{
 }

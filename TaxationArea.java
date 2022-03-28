@@ -1,2 +1,3 @@
-public class TaxationArea {
+public class TaxationArea extends Board{
+
 }
