@@ -192,9 +192,22 @@ public class Player{
         return flag;
     }
 
-    public void sell(){
+    public void sell(Board sellChoice , int houseNumber){// if the property was an empty place
         Scanner scanner = new Scanner(System.in);
-        System.out.println("This is the list of your properties :");
+        int moneyIncome=100/2 + sellChoice.getCountHouse()*150/2 + sellChoice.getCountHotel()*100/2;
+        inCome(moneyIncome);
+        sellChoice.setOwned(false);
+        String[] temp = new String[countProperties-1];
+        for(int i=0,j=0;i<countProperties;i++){
+            if(i+1==houseNumber){
+                continue;
+            }
+            temp[j]=properties[i];
+            j++;
+        }
+        countProperties--;
+        properties = temp;
+        /*System.out.println("This is the list of your properties :");
         for(int i=0;i<countProperties;i++){
             System.out.format("%d. %s\n", i+1,properties[i]);
         }
@@ -209,16 +222,9 @@ public class Player{
             System.out.format("You've earned 100$ by selling %s\n",propertyChoice);
             System.out.println("+100$");
             inCome(100);
+        }else{//
+
         }
-        String[] temp = new String[countProperties-1];
-        for(int i=0,j=0;i<countProperties;i++){
-            if(i+1==sellChoice){
-                continue;
-            }
-            temp[j]=properties[i];
-            j++;
-        }
-        countProperties--;
-        properties = temp;
+        */
     }
 }
