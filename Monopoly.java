@@ -171,7 +171,7 @@ public class Monopoly {
             if(input.equals("buy")){
                 System.out.println("-200$");
                 player.buy(200);
-                player.buyProperties(player , cinemaOwned);
+                player.buyProperties(cinemaOwned);
                 System.out.println("Thanks For Your Purchase");
             }
         }
@@ -339,7 +339,7 @@ public class Monopoly {
             if(scanner.next().equals("buy")){
                 player.buy(100);
                 emptyPlace.setOwned(true);
-                player.buyProperties(player , emptyPlaceFound(emptyPlaceNumber));
+                player.buyProperties(emptyPlaceFound(emptyPlaceNumber));
                 System.out.println("What You Want To Do With Your Own Place(build / Not Interested)");
                 if(scanner.next().equals("build")){
                     player.buildProperties(player , emptyPlace);

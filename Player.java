@@ -116,10 +116,10 @@ public class Player{
         this.position = position;
     }
 
-    public void buyProperties(Player player , String property) {
-        player.countProperties++;
-        player.properties = new String[countProperties];
-        player.properties[countProperties - 1] = property;
+    public void buyProperties(String property) {
+        countProperties++;
+        properties = new String[countProperties];
+        properties[countProperties - 1] = property;
         if (property.charAt(0) == 'C' || property.charAt(0) == 'c') {// if the property is cinema
             cinemaOwned++;
         } else if (property.charAt(0) == 'E' || property.charAt(0) == 'e') {
@@ -127,13 +127,13 @@ public class Player{
             Board[] temp = new EmptyPlace[emptyPlaceOwned];
             if(emptyPlaces != null) {
                 for (int i = 0; i < emptyPlaceOwned; i++) {
-                    if (player.emptyPlaces[i] != null)
-                        temp[i] = player.emptyPlaces[i];
+                    if (emptyPlaces[i] != null)
+                        temp[i] =emptyPlaces[i];
                 }
             }
             temp[emptyPlaceOwned-1] = new EmptyPlace();
             temp[emptyPlaceOwned - 1].setName("emptyPlace");
-            player.emptyPlaces = temp;
+            emptyPlaces = temp;
         }
     }
 
@@ -192,39 +192,49 @@ public class Player{
         return flag;
     }
 
-    public void sell(Board sellChoice , int houseNumber){// if the property was an empty place
+    public void sell(){
         Scanner scanner = new Scanner(System.in);
-        int moneyIncome=100/2 + sellChoice.getCountHouse()*150/2 + sellChoice.getCountHotel()*100/2;
-        inCome(moneyIncome);
-        sellChoice.setOwned(false);
-        String[] temp = new String[countProperties-1];
-        for(int i=0,j=0;i<countProperties;i++){
-            if(i+1==houseNumber){
-                continue;
+        System.out.println("This is the list of your properties :");
+        System.out.println("1.Cinema");
+        System.out.println("2.Empty place");
+        int firstChoice = scanner.nextInt();
+        while (firstChoice!=1 && firstChoice!=2){
+            System.out.println("Error : not in Options!!");
+            firstChoice = scanner.nextInt();
+        }
+        if(firstChoice==1){
+            for(int i=0,j=0;i<countProperties;i++){
+                if(properties[i].charAt(0)=='c' || properties[i].charAt(0)=='C'){
+                    System.out.format("%d. %s\n", j+1,properties[i]);
+                    j++;
+                }
             }
-            temp[j]=properties[i];
-            j++;
+            System.out.println("Which one do you want to sell ??");
+            int sellChoice = scanner.nextInt();
+            while (sellChoice<0 || sellChoice>cinemaOwned){
+                System.out.println("Error : Out of range !!");
+                sellChoice = scanner.nextInt();
+            }
+        }else {
+            for(int i=0;i<emptyPlaceOwned;i++){
+                System.out.format("%d. %s\n", i+1,emptyPlaces[i]);
+            }
+            System.out.println("Which one do you want to sell ??");
+            int sellChoice = scanner.nextInt();
+            while (sellChoice<0 || sellChoice>emptyPlaceOwned){
+                System.out.println("Error : Out of range !!");
+                sellChoice = scanner.nextInt();
+            }
+            int moneyIncome = 100/2 +  emptyPlaces[sellChoice-1].getCountHouse()*150/2 + emptyPlaces[sellChoice-1].getCountHotel()*100/2 ;
+            inCome(moneyIncome);
+            Board[] temp = new Board[emptyPlaceOwned-1];
+            for(int i=0,j=0;i<emptyPlaceOwned;i++){
+                if(i==sellChoice-1)
+                    continue;
+                temp[j] = emptyPlaces[i];
+                j++;
+            }
+            emptyPlaces = temp;
         }
-        countProperties--;
-        properties = temp;
-        /*System.out.println("This is the list of your properties :");
-        for(int i=0;i<countProperties;i++){
-            System.out.format("%d. %s\n", i+1,properties[i]);
-        }
-        System.out.println("Which one do you want to sell ??");
-        int sellChoice = scanner.nextInt();
-        while (sellChoice<0 && sellChoice>countProperties){
-            System.out.println("Error : Out of range !!");
-            sellChoice = scanner.nextInt();
-        }
-        String propertyChoice = properties[sellChoice-1];
-        if(propertyChoice.charAt(0)=='c' || propertyChoice.charAt(0)=='C'){// if the property was a cinema
-            System.out.format("You've earned 100$ by selling %s\n",propertyChoice);
-            System.out.println("+100$");
-            inCome(100);
-        }else{//
-
-        }
-        */
     }
 }
