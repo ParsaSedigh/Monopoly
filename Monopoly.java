@@ -266,7 +266,8 @@ public class Monopoly {
         Scanner scanner = new Scanner(System.in);
         if(player.getHaveInvest()){
             player.setMoney(player.getInvestedMoney() * 2 + player.getMoney());
-            System.out.format("%d Returned To You\n" ,player.getInvestedMoney() * 2);
+            System.out.format("%d$ Returned To You\n" ,player.getInvestedMoney() * 2);
+            player.setInvestedMoney(0);
             player.setHaveInvest(false);
             System.out.println("Would You Like To Make A Deposit Again?(Enter: invest / Not interested)");
             if (scanner.next().equals("invest")) {
