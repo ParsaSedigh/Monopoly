@@ -394,9 +394,9 @@ public class Monopoly {
         boardHouses[17] = new EmptyPlace();
         boardHouses[18] = new EmptyPlace();
         boardHouses[22] = new EmptyPlace();
-        boardHouses[2] = new AirPort();
-        boardHouses[10] = new AirPort();
-        boardHouses[19] = new AirPort();
+        boardHouses[2] = new Airport();
+        boardHouses[10] = new Airport();
+        boardHouses[19] = new Airport();
         boardHouses[3] = new Cinema();
         boardHouses[7] = new Cinema();
         boardHouses[14] = new Cinema();
@@ -411,7 +411,7 @@ public class Monopoly {
     }
 
     private static void playProcesses(Player player){
-        if(Monopoly.boardHouses[player.getPosition() - 1] instanceof AirPort){
+        if(Monopoly.boardHouses[player.getPosition() - 1] instanceof Airport){
             AirportMethod(player);
             return;
         }
