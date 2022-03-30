@@ -131,11 +131,9 @@ public class Player{
                         temp[i] = player.emptyPlaces[i];
                 }
             }
-                temp[emptyPlaceOwned-1] = new EmptyPlace();
-                temp[emptyPlaceOwned - 1].setName("emptyPlace");
-                player.emptyPlaces = temp;
-            //player.emptyPlaces = new EmptyPlace[emptyPlaceOwned];
-
+            temp[emptyPlaceOwned-1] = new EmptyPlace();
+            temp[emptyPlaceOwned - 1].setName("emptyPlace");
+            player.emptyPlaces = temp;
         }
     }
 
@@ -192,5 +190,35 @@ public class Player{
             }
         }
         return flag;
+    }
+
+    public void sell(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("This is the list of your properties :");
+        for(int i=0;i<countProperties;i++){
+            System.out.format("%d. %s\n", i+1,properties[i]);
+        }
+        System.out.println("Which one do you want to sell ??");
+        int sellChoice = scanner.nextInt();
+        while (sellChoice<0 && sellChoice>countProperties){
+            System.out.println("Error : Out of range !!");
+            sellChoice = scanner.nextInt();
+        }
+        String propertyChoice = properties[sellChoice-1];
+        if(propertyChoice.charAt(0)=='c' || propertyChoice.charAt(0)=='C'){// if the property was a cinema
+            System.out.format("You've earned 100$ by selling %s\n",propertyChoice);
+            System.out.println("+100$");
+            inCome(100);
+        }
+        String[] temp = new String[countProperties-1];
+        for(int i=0,j=0;i<countProperties;i++){
+            if(i+1==sellChoice){
+                continue;
+            }
+            temp[j]=properties[i];
+            j++;
+        }
+        countProperties--;
+        properties = temp;
     }
 }
