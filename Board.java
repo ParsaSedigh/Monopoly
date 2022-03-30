@@ -1,4 +1,4 @@
-public abstract class Board{
+public class Board{
 
     public String[] houses;
     private boolean isOwned = false;
@@ -8,21 +8,25 @@ public abstract class Board{
         return this.isOwned;
     }
 
-    public abstract void setCountHouse(int countHouse);
+    public void setOwned(boolean owned) {
+        isOwned = owned;
+    }
 
-    public abstract void setName(String emptyPlace);
+    public void setCountHouse(int countHouse){};
 
-    public abstract int getCountHouse();
+    public void setName(String emptyPlace){};
 
-    public abstract void delHouses();
+    public int getCountHouse(){return 0;}
 
-    public abstract void setCountHotel(int countHotel);
+    public void delHouses(){};
 
-    public abstract int getCountHotel();
+    public void setCountHotel(int countHotel){};
 
-    public abstract String getColor();
+    public int getCountHotel(){return 0;}
 
-    public abstract void setColor(String color);
+    public String getColor(){return null;}
+
+    public void setColor(String color){};
 }
 /* ╔═══╦════╦═══╦════╦════╦═════╦════╗
    ║ 7 ║  8 ║ 9 ║ 10 ║ 11 ║ 12  ║ 13 ║

@@ -124,8 +124,18 @@ public class Player{
             cinemaOwned++;
         } else if (property.charAt(0) == 'E' || property.charAt(0) == 'e') {
             emptyPlaceOwned++;
-            player.emptyPlaces = new EmptyPlace[emptyPlaceOwned];
-            player.emptyPlaces[emptyPlaceOwned - 1].setName("emptyPlace");
+            Board[] temp = new EmptyPlace[emptyPlaceOwned];
+            if(emptyPlaces != null) {
+                for (int i = 0; i < emptyPlaceOwned; i++) {
+                    if (player.emptyPlaces[i] != null)
+                        temp[i] = player.emptyPlaces[i];
+                }
+            }
+                temp[emptyPlaceOwned-1] = new EmptyPlace();
+                temp[emptyPlaceOwned - 1].setName("emptyPlace");
+                player.emptyPlaces = temp;
+            //player.emptyPlaces = new EmptyPlace[emptyPlaceOwned];
+
         }
     }
 

@@ -338,12 +338,14 @@ public class Monopoly {
             System.out.println("This Place Has No Owner!(buy / Not Interested):");
             if(scanner.next().equals("buy")){
                 player.buy(100);
+                emptyPlace.setOwned(true);
                 player.buyProperties(player , emptyPlaceFound(emptyPlaceNumber));
-                System.out.println("What You Want To Do With Your Own Place(Build / Not Interested)");
+                System.out.println("What You Want To Do With Your Own Place(build / Not Interested)");
                 if(scanner.next().equals("build")){
                     player.buildProperties(player , emptyPlace);
                     emptyPlace.setColor(colorsOfEmptyplaces(emptyPlaceNumber));
-                    player.setMonopoly(monopolyOfProperty(player , emptyPlace));
+                    if(player.getEmptyPlaceOwned()>1)
+                        player.setMonopoly(monopolyOfProperty(player , emptyPlace));
                 }
                 else{
                     System.out.println("Maybe Next Time :)");
@@ -481,9 +483,14 @@ public class Monopoly {
     public static boolean monopolyOfProperty(Player player , Board emptyPlace){
         boolean flag = false;
         Board[] playerEmptyPlaces = player.getEmptyPlaces();
-        for (int i = 0; i < player.getEmptyPlaceOwned(); i++) {
-            if(playerEmptyPlaces[i].getColor().equals(emptyPlace.getColor()))
-                flag = true;
+        if(playerEmptyPlaces!=null){
+            for (int i = 0; i < player.getEmptyPlaceOwned(); i++) {
+                if(playerEmptyPlaces[i]!=null)
+                {
+                    if(playerEmptyPlaces[i].getColor().equals(emptyPlace.getColor()))
+                        flag = true;
+                }
+            }
         }
         return flag;
     }
@@ -493,10 +500,14 @@ public class Monopoly {
         String emptyPlace = emptyPlaceFound(emptyPlaceNumber);
         for (Player player : players) {
             String[] tempProperty = player.getProperties();
-            for (String s : tempProperty) {
-                if (s.equals(emptyPlace)) {
-                    result = player;
-                    break;
+            if (tempProperty != null) {
+                for (String s : tempProperty) {
+                    if(s!=null){
+                        if (s.equals(emptyPlace)) {
+                            result = player;
+                            break;
+                        }
+                    }
                 }
             }
         }
