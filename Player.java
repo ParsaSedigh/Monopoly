@@ -204,9 +204,11 @@ public class Player{
         }
         if(firstChoice==1){
             System.out.println("Which one do you want to sell ??");
+            int[] tempIndex = new int[cinemaOwned];
             for(int i=0,j=0;i<countProperties;i++){
                 if(properties[i].charAt(0)=='c' || properties[i].charAt(0)=='C'){
                     System.out.format("%d. %s\n", j+1,properties[i]);
+                    tempIndex[j] = i;// saving the indexes of Cinemas in Properties
                     j++;
                 }
             }
@@ -216,6 +218,18 @@ public class Player{
                 sellChoice = scanner.nextInt();
             }
             inCome(200/2);
+            String[] tempProperties = new String[countProperties-1];
+            for(int i=0,j=0 ; i<countProperties ; i++){
+                if(i==tempIndex[sellChoice-1])
+                    continue;
+                tempProperties[j]=properties[i];
+                j++;
+            }
+            System.out.format("%s sold successfully", properties[tempIndex[sellChoice-1]]);
+            cinemaOwned--;
+            countProperties--;
+            properties = tempProperties;
+
         }else {
             System.out.println("Which one do you want to sell ??");
             for(int i=0;i<emptyPlaceOwned;i++){
