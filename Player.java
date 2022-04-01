@@ -82,11 +82,18 @@ public class Player{
     }
 
     public void buy(int cost){
-        money-=cost;
+        if(money - cost >= 0)
+            money-=cost;
+        else
+            System.out.println("You don't have enough money to buy it !!");
     }
 
     public void fine(int cost){
-        money -= cost;
+        if(money - cost >= 0)
+            money -= cost;
+        else {
+            System.out.println("You don't have enough money to pay it !!");
+        }
     }
 
     public void inCome(int amount){
