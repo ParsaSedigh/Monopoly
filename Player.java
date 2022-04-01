@@ -203,23 +203,23 @@ public class Player{
             firstChoice = scanner.nextInt();
         }
         if(firstChoice==1){
+            System.out.println("Which one do you want to sell ??");
             for(int i=0,j=0;i<countProperties;i++){
                 if(properties[i].charAt(0)=='c' || properties[i].charAt(0)=='C'){
                     System.out.format("%d. %s\n", j+1,properties[i]);
                     j++;
                 }
             }
-            System.out.println("Which one do you want to sell ??");
             int sellChoice = scanner.nextInt();
             while (sellChoice<0 || sellChoice>cinemaOwned){
                 System.out.println("Error : Out of range !!");
                 sellChoice = scanner.nextInt();
             }
         }else {
+            System.out.println("Which one do you want to sell ??");
             for(int i=0;i<emptyPlaceOwned;i++){
                 System.out.format("%d. %s\n", i+1,emptyPlaces[i]);
             }
-            System.out.println("Which one do you want to sell ??");
             int sellChoice = scanner.nextInt();
             while (sellChoice<0 || sellChoice>emptyPlaceOwned){
                 System.out.println("Error : Out of range !!");
