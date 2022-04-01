@@ -215,6 +215,7 @@ public class Player{
                 System.out.println("Error : Out of range !!");
                 sellChoice = scanner.nextInt();
             }
+            inCome(200/2);
         }else {
             System.out.println("Which one do you want to sell ??");
             for(int i=0;i<emptyPlaceOwned;i++){
@@ -234,6 +235,8 @@ public class Player{
                 temp[j] = emptyPlaces[i];
                 j++;
             }
+            emptyPlaces[sellChoice-1].setOwned(false);
+            emptyPlaceOwned--;
             emptyPlaces = temp;
         }
     }
