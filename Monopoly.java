@@ -72,7 +72,25 @@ public class Monopoly {
                             System.out.format("You are in : %d \n", players[i].getPosition());
                             break;
                         case "rank":
-
+                            System.out.println("Rank of players in order of money : ");
+                            Player[] tempPlayers = players;
+                            Player sub ;
+                            for(int j=0;j< players.length;j++){
+                                for(int k=j+1;j< players.length && k< players.length;k++){
+                                    if(tempPlayers[j].getMoney()<tempPlayers[k].getMoney()){
+                                        sub = tempPlayers[j];
+                                        tempPlayers[j] = tempPlayers[k];
+                                        tempPlayers[k] = sub;
+                                    }
+                                }
+                            }
+                            for(int j=0;j< tempPlayers.length;j++){
+                                if(players[i].getName().equals(tempPlayers[j].getName())){
+                                    System.out.format("%d.%s  %d$ <-\n",j+1,tempPlayers[j].getName(),tempPlayers[j].getMoney());
+                                }else{
+                                    System.out.format("%d.%s  %d$\n",j+1,tempPlayers[j].getName(),tempPlayers[j].getMoney());
+                                }
+                            }
                             break;
                         case "property":
                             String[] temp = players[i].getProperties();
