@@ -58,32 +58,61 @@ public class Monopoly {
             for(int i=0 ; i< players.length;i++){
                 System.out.format("%s : \n", players[i].getName());
                 showBoard();
-                if(players[i].isPrisoner()){
+                String command = scanner.next();
+                while (!command.equals("sell") && !command.equals("index") && !command.equals("rank") && !command.equals("property") && !command.equals("dice")){
+                    System.out.println("Error : Wrong command !!");
+                    command = scanner.next();
+                }
+                while (!command.equals("dice")){
+                    switch (command) {
+                        case "sell":
+                            players[i].sell();
+                            break;
+                        case "index":
+                            System.out.format("You are in : %d \n", players[i].getPosition());
+                            break;
+                        case "rank":
+
+                            break;
+                        case "property":
+                            for(int j=0;j<players[i].getCountProperties();j++){
+                                System.out.format("%d.%s\n",j+1,players[i].properties[j]);
+                            }
+                            break;
+                    }
+                    System.out.println("Enter your next command : ");
+                    command = scanner.next();
+                    while (!command.equals("sell") && !command.equals("index") && !command.equals("rank") && !command.equals("property") && !command.equals("dice")){
+                        System.out.println("Error : Wrong command !!");
+                        command = scanner.next();
+                    }
+                }
+                if (players[i].isPrisoner()) {
                     System.out.println("You are still a prisoner");
                     System.out.println("free/nothing/dice");
                     jailProcess(players[i]);
-                }else {
+                } else {
                     System.out.format("Enter 1 to 6 for dice : \n");
                     int diceNumber = scanner.nextInt();
-                    while (diceNumber<1 || diceNumber>6){
+                    while (diceNumber < 1 || diceNumber > 6) {
                         System.out.println("Error : Dice number out of range !!");
                         diceNumber = scanner.nextInt();
                     }
-                    if(diceNumber==6){
+                    if (diceNumber == 6) {
                         System.out.println("Be careful , next 6 will make you a prisoner , Dice Again:");
                         diceNumber = scanner.nextInt();
-                        while (diceNumber<1 || diceNumber>6){
+                        while (diceNumber < 1 || diceNumber > 6) {
                             System.out.println("Error : Dice number out of range !!");
                             diceNumber = scanner.nextInt();
                         }
-                        if(diceNumber==6){
+                        if (diceNumber == 6) {
                             System.out.println("You َAre in Jail now  :O");
                             players[i].setPrisoner(true);
                             players[i].setPosition(13);
                             System.out.println("free/nothing/dice");
                             jailProcess(players[i]);
                         }
-                    }else {
+                    } else {
                         players[i].move(diceNumber);
                         playProcesses(players[i]);
                     }
@@ -578,7 +607,7 @@ public class Monopoly {
         System.out.println("║ 1 ║ 24 ║ 23 ║ 22 ║ 21 ║ 20 ║ 19 ║     14.Empty Area");
         System.out.println("╚═══╩════╩════╩════╩════╩════╩════╝     15.Cinema");
         System.out.println("Commands : ");
-        System.out.println("sell    index    property    rank");
+        System.out.println("sell    index    property    rank   dice");
     }
 }
 
