@@ -553,6 +553,8 @@ public class Monopoly {
         System.out.println("╠═══╬════╦════╦════╦════╦════╬════╣     13.Jail");
         System.out.println("║ 1 ║ 24 ║ 23 ║ 22 ║ 21 ║ 20 ║ 19 ║     14.Empty Area");
         System.out.println("╚═══╩════╩════╩════╩════╩════╩════╝     15.Cinema");
+        System.out.println("Commands : ");
+        System.out.println("sell    index    property    rank");
     }
 }
 
