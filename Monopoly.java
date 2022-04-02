@@ -58,29 +58,36 @@ public class Monopoly {
             for(int i=0 ; i< players.length;i++){
                 System.out.format("%s : \n", players[i].getName());
                 showBoard();
-                System.out.format("Enter 1 to 6 for dice : \n");
-                int diceNumber = scanner.nextInt();
-                while (diceNumber<1 || diceNumber>6){
-                    System.out.println("Error : Dice number out of range !!");
-                    diceNumber = scanner.nextInt();
-                }
-                if(diceNumber==6){
-                    System.out.println("Be careful , next 6 will make you a prisoner , Dice Again:");
-                    diceNumber = scanner.nextInt();
+                if(players[i].isPrisoner()){
+                    System.out.println("You are still a prisoner");
+                    System.out.println("free/nothing/dice");
+                    jailProcess(players[i]);
+                }else {
+                    System.out.format("Enter 1 to 6 for dice : \n");
+                    int diceNumber = scanner.nextInt();
                     while (diceNumber<1 || diceNumber>6){
                         System.out.println("Error : Dice number out of range !!");
                         diceNumber = scanner.nextInt();
                     }
                     if(diceNumber==6){
-                        System.out.println("You َAre in Jail now  :O");
-                        players[i].setPrisoner(true);
-                        players[i].setPosition(13);
-                        System.out.println("free/nothing");
-                        jailProcess(players[i]);
+                        System.out.println("Be careful , next 6 will make you a prisoner , Dice Again:");
+                        diceNumber = scanner.nextInt();
+                        while (diceNumber<1 || diceNumber>6){
+                            System.out.println("Error : Dice number out of range !!");
+                            diceNumber = scanner.nextInt();
+                        }
+                        if(diceNumber==6){
+                            System.out.println("You َAre in Jail now  :O");
+                            players[i].setPrisoner(true);
+                            players[i].setPosition(13);
+                            System.out.println("free/nothing/dice");
+                            jailProcess(players[i]);
+                        }
+                    }else {
+                        players[i].move(diceNumber);
+                        playProcesses(players[i]);
                     }
                 }
-                players[i].move(diceNumber);
-                playProcesses(players[i]);
             }
         }
     }
@@ -106,7 +113,7 @@ public class Monopoly {
                 System.out.println("You َAre in Jail now  :O");
                 player.setPrisoner(true);
                 player.setPosition(13);
-                System.out.println("free/nothing");
+                System.out.println("free/nothing/dice");
                 jailProcess(player);
                 break;
             case 3:
@@ -469,7 +476,7 @@ public class Monopoly {
     public static void jailProcess(Player player){
         Scanner scanner = new Scanner(System.in);
         String jailChoice = scanner.nextLine();
-        while(!jailChoice.equals("free") && !jailChoice.equals("nothing")){
+        while(!jailChoice.equals("free") && !jailChoice.equals("nothing") && !jailChoice.equals("dice")){
             System.out.println("Error : Undefined command !!");
             jailChoice = scanner.nextLine();
         }
@@ -477,6 +484,23 @@ public class Monopoly {
             player.fine(50);
             player.setPrisoner(false);
             System.out.println("-$50");
+        }else if(jailChoice.equals("dice")){
+            System.out.println("Take your chance . Only dice -> 1  will be able to set you free");
+            int freeDice = scanner.nextInt();
+            while(freeDice<1 || freeDice>6){
+                System.out.println("Error : Wrong input !!");
+                freeDice = scanner.nextInt();
+            }
+            if(freeDice==1){
+                System.out.println("You are a free man :)");
+                player.setPrisoner(false);
+            }else {
+                player.fine(10);
+                System.out.println("-10$");
+            }
+        }else{
+            player.fine(10);
+            System.out.println("-10$");
         }
     }
 
