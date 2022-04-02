@@ -4,7 +4,7 @@ public class Player{
     private String name;
     private int money;
     private int countProperties = 0;
-    private String[] properties;
+    public String[] properties;
     private String[] hotels;
     private Board[] emptyPlaces;
     private int cinemaOwned = 0;
