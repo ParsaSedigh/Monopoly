@@ -75,8 +75,13 @@ public class Monopoly {
 
                             break;
                         case "property":
-                            for(int j=0;j<players[i].getCountProperties();j++){
-                                System.out.format("%d.%s\n",j+1,players[i].properties[j]);
+                            String[] temp = players[i].getProperties();
+                            if(temp==null){
+                                System.out.format("%s has no property\n", players[i].getName());
+                                break;
+                            }
+                            for(int j=0; j<temp.length; j++){
+                                System.out.format("%d.%s\n", j+1,temp[j]);
                             }
                             break;
                     }
@@ -170,28 +175,30 @@ public class Monopoly {
         for (int i = 0; i < players.length; i++) {
             for (int j = 0; j < players[i].getCountProperties(); j++) {
                 String[] temp = players[i].getProperties();
-                if(temp[j].equals(cinemaOwned)){
-                    mustPay = true;
-                    if(players[i].getCinemaOwned() == 1){
-                        System.out.format("You Must pay 25$ to %s\n" , players[i].getName());
-                        System.out.println("-25$");
-                        player.fine(25);
-                        players[i].inCome(25);
-                        return;
-                    }
-                    else if(players[i].getCinemaOwned() == 2){
-                        System.out.format("You Must pay 50$ to %s\n" , players[i].getName());
-                        System.out.println("-50$");
-                        player.fine(50);
-                        players[i].inCome(50);
-                        return;
-                    }
-                    else if(players[i].getCinemaOwned() == 3){
-                        System.out.format("You Must pay 100$ to %s\n" , players[i].getName());
-                        System.out.println("-100$");
-                        player.fine(100);
-                        players[i].inCome(100);
-                        return;
+                if(temp[j]!=null){
+                    if(temp[j].equals(cinemaOwned)){
+                        mustPay = true;
+                        if(players[i].getCinemaOwned() == 1){
+                            System.out.format("You Must pay 25$ to %s\n" , players[i].getName());
+                            System.out.println("-25$");
+                            player.fine(25);
+                            players[i].inCome(25);
+                            return;
+                        }
+                        else if(players[i].getCinemaOwned() == 2){
+                            System.out.format("You Must pay 50$ to %s\n" , players[i].getName());
+                            System.out.println("-50$");
+                            player.fine(50);
+                            players[i].inCome(50);
+                            return;
+                        }
+                        else if(players[i].getCinemaOwned() == 3){
+                            System.out.format("You Must pay 100$ to %s\n" , players[i].getName());
+                            System.out.println("-100$");
+                            player.fine(100);
+                            players[i].inCome(100);
+                            return;
+                        }
                     }
                 }
             }

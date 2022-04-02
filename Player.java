@@ -225,6 +225,7 @@ public class Player{
                 sellChoice = scanner.nextInt();
             }
             inCome(200/2);
+            System.out.println("+100$");
             String[] tempProperties = new String[countProperties-1];
             for(int i=0,j=0 ; i<countProperties ; i++){
                 if(i==tempIndex[sellChoice-1])
@@ -249,6 +250,7 @@ public class Player{
             }
             int moneyIncome = 100/2 +  emptyPlaces[sellChoice-1].getCountHouse()*150/2 + emptyPlaces[sellChoice-1].getCountHotel()*100/2 ;
             inCome(moneyIncome);
+            System.out.format("+%d$\n",moneyIncome);
             Board[] temp = new Board[emptyPlaceOwned-1];
             for(int i=0,j=0;i<emptyPlaceOwned;i++){
                 if(i==sellChoice-1)
