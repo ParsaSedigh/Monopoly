@@ -16,6 +16,15 @@ public class Player{
     private int houseOwned = 0;
     private int hotelsOwned = 0;
     private boolean monopoly = false;
+    private boolean isBankrupt = false;
+
+    public void setBankrupt(boolean bankrupt) {
+        isBankrupt = bankrupt;
+    }
+
+    public boolean isBankrupt() {
+        return isBankrupt;
+    }
 
     public Board[] getEmptyPlaces() {
         return emptyPlaces;
@@ -92,7 +101,18 @@ public class Player{
         if(money - cost >= 0)
             money -= cost;
         else {
-            System.out.println("You don't have enough money to pay it !!");
+            while(money - cost <0){
+                System.out.println("You don't have enough money to pay it !!");
+                if(countProperties==0){
+                    setBankrupt(true);
+                    System.out.format("Player '%s' lost the game",getName());
+                    return;
+                }else{
+                    System.out.println("You are out of money\nYou have to sell your properties");
+                    sell();
+                }
+            }
+            money-= cost;
         }
     }
 
