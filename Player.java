@@ -17,6 +17,24 @@ public class Player{
     private int hotelsOwned = 0;
     private boolean monopoly = false;
     private boolean isBankrupt = false;
+    private int jailFreeTicket = 0;
+    private int taxAreaTicket = 0;
+
+    public void setTaxAreaTicket(int taxAreaTicket) {
+        this.taxAreaTicket = taxAreaTicket;
+    }
+
+    public int getTaxAreaTicket() {
+        return taxAreaTicket;
+    }
+
+    public void setJailFreeTicket(int jailFreeTicket) {
+        this.jailFreeTicket = jailFreeTicket;
+    }
+
+    public int getJailFreeTicket() {
+        return jailFreeTicket;
+    }
 
     public void setBankrupt(boolean bankrupt) {
         isBankrupt = bankrupt;

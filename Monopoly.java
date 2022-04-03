@@ -178,7 +178,7 @@ public class Monopoly {
             temp = scanner.nextInt();
         }
         int rand = new Random().nextInt();
-        int num = Math.abs(rand)%4 +1;
+        int num = Math.abs(rand)%7 +1;
         switch (num){
             case 1:
                 System.out.println("You have earned $200 from Bank");
@@ -202,6 +202,12 @@ public class Monopoly {
                 player.move(3);
                 playProcesses(player);
                 break;
+            case 5:
+                System.out.println("You Get A Ticket For Jail!");
+                player.setJailFreeTicket(player.getJailFreeTicket() + 1);
+                break;
+            case 6:
+                System.out.println("You Get A Ticket! : If You Enter The Tax Area, You Do Not Have To Pay Money To The Bank For Once!");
         }
     }
 
@@ -554,31 +560,40 @@ public class Monopoly {
     public static void jailProcess(Player player){
         Scanner scanner = new Scanner(System.in);
         String jailChoice = scanner.nextLine();
-        while(!jailChoice.equals("free") && !jailChoice.equals("nothing") && !jailChoice.equals("dice")){
-            System.out.println("Error : Undefined command !!");
-            jailChoice = scanner.nextLine();
-        }
-        if(jailChoice.equals("free")){
-            player.fine(50);
-            player.setPrisoner(false);
-            System.out.println("-$50");
-        }else if(jailChoice.equals("dice")){
-            System.out.println("Take your chance . Only dice -> 1  will be able to set you free");
-            int freeDice = scanner.nextInt();
-            while(freeDice<1 || freeDice>6){
-                System.out.println("Error : Wrong input !!");
-                freeDice = scanner.nextInt();
-            }
-            if(freeDice==1){
-                System.out.println("You are a free man :)");
+        if(player.getJailFreeTicket() > 1){
+            System.out.println("You Have A Ticket To Get Free From Jail! , Do You Want To Use it?(Y / N)");
+            if(scanner.next().equals("Y")) {
                 player.setPrisoner(false);
-            }else {
+                player.setJailFreeTicket(player.getJailFreeTicket() - 1);
+            }
+        }
+        else {
+            while (!jailChoice.equals("free") && !jailChoice.equals("nothing") && !jailChoice.equals("dice")) {
+                System.out.println("Error : Undefined command !!");
+                jailChoice = scanner.nextLine();
+            }
+            if (jailChoice.equals("free")) {
+                player.fine(50);
+                player.setPrisoner(false);
+                System.out.println("-$50");
+            } else if (jailChoice.equals("dice")) {
+                System.out.println("Take your chance . Only dice -> 1  will be able to set you free");
+                int freeDice = scanner.nextInt();
+                while (freeDice < 1 || freeDice > 6) {
+                    System.out.println("Error : Wrong input !!");
+                    freeDice = scanner.nextInt();
+                }
+                if (freeDice == 1) {
+                    System.out.println("You are a free man :)");
+                    player.setPrisoner(false);
+                } else {
+                    player.fine(10);
+                    System.out.println("-10$");
+                }
+            } else {
                 player.fine(10);
                 System.out.println("-10$");
             }
-        }else{
-            player.fine(10);
-            System.out.println("-10$");
         }
     }
 
