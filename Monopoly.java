@@ -143,8 +143,29 @@ public class Monopoly {
                         playProcesses(players[i]);
                     }
                 }
+                int inGamePlayers=0;
+                for(int j=0; j< players.length;j++){
+                    if(players[j].isBankrupt()){
+                        continue;
+                    }
+                    inGamePlayers++;
+                }
+                Player[] tempPlayersInGame = new Player[inGamePlayers];
+                for(int j=0,k=0;j<players.length;j++){
+                    if(players[j].isBankrupt()){
+                        continue;
+                    }
+                    tempPlayersInGame[k] = players[j];
+                    k++;
+                }
+                players = tempPlayersInGame;
+                if(inGamePlayers==1){
+                    endGame = true;
+                    break;
+                }
             }
         }
+        System.out.format("Congratulation %s\n You are the winner",players[0].getName());
     }
 
     public static void questionAreaMethod(Player player) {
