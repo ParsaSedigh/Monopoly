@@ -73,7 +73,10 @@ public class Monopoly {
                             break;
                         case "rank":
                             System.out.println("Rank of players in order of money : ");
-                            Player[] tempPlayers = players;
+                            Player[] tempPlayers = new Player[players.length];
+                            for(int j=0;j< players.length;j++){
+                                tempPlayers[j]=players[j];
+                            }
                             Player sub ;
                             for(int j=0;j< players.length;j++){
                                 for(int k=j+1;j< players.length && k< players.length;k++){
