@@ -208,6 +208,19 @@ public class Monopoly {
                 break;
             case 6:
                 System.out.println("You Get A Ticket! : If You Enter The Tax Area, You Do Not Have To Pay Money To The Bank For Once!");
+                player.setTaxAreaTicket(player.getTaxAreaTicket() + 1);
+                break;
+            case 7:
+                System.out.println("You Must Pay Each Player 10$!!!");
+                int fine = 0;
+                for (Player value : players) {
+                    if (player != value) {
+                        value.inCome(10);
+                        player.fine(10);
+                        fine += 10;
+                    }
+                }
+                System.out.format("-%d For %s" , fine , player.getName());
         }
     }
 
@@ -540,10 +553,24 @@ public class Monopoly {
             return;
         }
         if(Monopoly.boardHouses[player.getPosition() - 1] instanceof TaxationArea){
-            int temp=player.getMoney()/10;
-            System.out.println("You have to pay Tax!!!");
-            System.out.format("-$%d",temp);
-            player.buy(temp);
+            if(player.getTaxAreaTicket() > 1){
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("You Can Use Your Tax Ticket , Do You Want?(Y / N)");
+                if(scanner.next().equals("Y"))
+                    player.setTaxAreaTicket(player.getTaxAreaTicket() - 1);
+                else {
+                    int temp = player.getMoney() / 10;
+                    System.out.println("You have to pay Tax!!!");
+                    System.out.format("-$%d", temp);
+                    player.buy(temp);
+                }
+            }
+            else {
+                int temp = player.getMoney() / 10;
+                System.out.println("You have to pay Tax!!!");
+                System.out.format("-$%d", temp);
+                player.buy(temp);
+            }
             return;
         }
         if(Monopoly.boardHouses[player.getPosition() - 1] instanceof FreeParking){
