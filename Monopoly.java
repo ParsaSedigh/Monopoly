@@ -397,6 +397,7 @@ public class Monopoly {
     }
 
     public static void emptyPlace(Player player , Board emptyPlace , int emptyPlaceNumber){// 2 , 7 , 9 , 2 = 12 , 14 , 9 = 18 , 7 = 19 ,14 = 23
+        System.out.println(emptyPlace.getColor());
         if(emptyPlace.getIsOwned()){
             String[] tempPlayerProperties = player.getProperties();
             String emptyPlaceToString = emptyPlaceFound(emptyPlaceNumber);
@@ -493,13 +494,21 @@ public class Monopoly {
 
         boardHouses[0] = new FreeParking();
         boardHouses[1] = new EmptyPlace();
+        boardHouses[1].setColor("green");
         boardHouses[6] = new EmptyPlace();
+        boardHouses[6].setColor("yellow");
         boardHouses[8] = new EmptyPlace();
+        boardHouses[8].setColor("red");
         boardHouses[11] = new EmptyPlace();
+        boardHouses[11].setColor("green");
         boardHouses[13] = new EmptyPlace();
+        boardHouses[13].setColor("blue");
         boardHouses[17] = new EmptyPlace();
+        boardHouses[17].setColor("red");
         boardHouses[18] = new EmptyPlace();
+        boardHouses[18].setColor("yellow");
         boardHouses[22] = new EmptyPlace();
+        boardHouses[22].setColor("blue");
         boardHouses[2] = new Airport();
         boardHouses[10] = new Airport();
         boardHouses[19] = new Airport();

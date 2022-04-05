@@ -12,15 +12,15 @@ public class Board{
         isOwned = owned;
     }
 
-    public void setCountHouse(int countHouse){};
+    public void setCountHouse(int countHouse){}
 
-    public void setName(String emptyPlace){};
+    public void setName(String emptyPlace){}
 
     public int getCountHouse(){return 0;}
 
     public void delHouses(){};
 
-    public void setCountHotel(int countHotel){};
+    public void setCountHotel(int countHotel){}
 
     public int getCountHotel(){return 0;}
 
