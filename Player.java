@@ -238,6 +238,10 @@ public class Player{
     }
 
     public void sell(){
+        if(countProperties==0){
+            System.out.format("%s has no property\n",getName());
+            return;
+        }
         Scanner scanner = new Scanner(System.in);
         System.out.println("This is the list of your properties :");
         System.out.println("1.Cinema");
@@ -248,6 +252,10 @@ public class Player{
             firstChoice = scanner.nextInt();
         }
         if(firstChoice==1){
+            if(cinemaOwned==0){
+                System.out.format("%s has no Cinema\n", getName());
+                return;
+            }
             System.out.println("Which one do you want to sell ??");
             int[] tempIndex = new int[cinemaOwned];
             for(int i=0,j=0;i<countProperties;i++){
@@ -277,6 +285,10 @@ public class Player{
             properties = tempProperties;
 
         }else {
+            if(emptyPlaceOwned==0){
+                System.out.format("%s has no Empty house\n", getName());
+                return;
+            }
             System.out.println("Which one do you want to sell ??");
             for(int i=0;i<emptyPlaceOwned;i++){
                 System.out.format("%d. %s\n", i+1,emptyPlaces[i]);
