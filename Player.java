@@ -197,7 +197,7 @@ public class Player{
                 }
             } else {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Do You Want To Build Hotel and Replace The Hotel With Your Houses?(build / Not Interested");
+                System.out.println("Do You Want To Build Hotel and Replace The Hotel With Your Houses?(build / Not Interested)");
                 if (scanner.next().equals("build")) {
                     emptyPlace.delHouses();
                     houseOwned = 0;
@@ -206,7 +206,7 @@ public class Player{
                     player.hotels[player.getHotelsOwned() - 1] = "Hotel";
                     player.buy(100);
                     emptyPlace.setCountHotel(hotelsOwned);
-                    System.out.println("Build Hotel");
+                    System.out.println("Hotel built");
                 }
             }
         }

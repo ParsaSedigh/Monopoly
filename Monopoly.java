@@ -346,12 +346,14 @@ public class Monopoly {
             int index=1;
             int[] temp = new int[2];
             if(player.getPosition()!=3){
-                System.out.format("%d.Airport(3)\n", index++);
+                System.out.format("%d.Airport(3)\n", index);
                 temp[index-1] = 3;
+                index++;
             }
             if(player.getPosition()!=11){
-                System.out.format("%d.Airport(11)\n", index++);
+                System.out.format("%d.Airport(11)\n", index);
                 temp[index-1] = 11;
+                index++;
             }
             if(player.getPosition()!=20){
                 System.out.format("%d.Airport(20)\n", index);
