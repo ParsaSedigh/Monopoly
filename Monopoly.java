@@ -96,13 +96,12 @@ public class Monopoly {
                             }
                             break;
                         case "property":
-                            String[] temp = players[i].getProperties();
-                            if(temp==null){
+                            if(players[i].getProperties()==null){
                                 System.out.format("%s has no property\n", players[i].getName());
                                 break;
                             }
-                            for(int j=0; j<temp.length; j++){
-                                System.out.format("%d.%s\n", j+1,temp[j]);
+                            for(int j=0; j<players[i].getProperties().length; j++){
+                                System.out.format("%d.%s\n", j+1,players[i].getProperties()[j]);
                             }
                             break;
                     }
@@ -400,6 +399,7 @@ public class Monopoly {
 
     public static void emptyPlace(Player player , Board emptyPlace , int emptyPlaceNumber){// 2 , 7 , 9 , 2 = 12 , 14 , 9 = 18 , 7 = 19 ,14 = 23
         System.out.println(emptyPlace.getColor());
+        System.out.format("You are in %s place", emptyPlace.getColor());
         if(emptyPlace.getIsOwned()){
             String[] tempPlayerProperties = player.getProperties();
             String emptyPlaceToString = emptyPlaceFound(emptyPlaceNumber);
@@ -431,8 +431,9 @@ public class Monopoly {
                 }
                 else{
                     fine = 50;
-                    if(emptyPlace.getCountHouse() > 0){
-                        fine += emptyPlace.getCountHotel() * 600  + emptyPlace.getCountHouse() * 100;
+                    //System.out.println(emptyPlace.getCountHouse());
+                    if(emptyPlace.getCountHouse() > 0 || emptyPlace.getCountHotel()>0){
+                        fine += emptyPlace.getCountHotel() * 550  + emptyPlace.getCountHouse() * 100;
                     }
                 }
                 System.out.format("You Must Pay %d$ to %s\n" , fine , ownerOfProperty.getName());
@@ -642,8 +643,11 @@ public class Monopoly {
             for (int i = 0; i < player.getEmptyPlaceOwned(); i++) {
                 if(playerEmptyPlaces[i]!=null)
                 {
-                    if(playerEmptyPlaces[i].getColor().equals(emptyPlace.getColor()))
-                        flag = true;
+                    if(playerEmptyPlaces[i].getColor() != null){
+                        if(playerEmptyPlaces[i].getColor().equals(emptyPlace.getColor()))
+                            flag = true;
+                    }
+
                 }
             }
         }

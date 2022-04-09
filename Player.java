@@ -163,8 +163,12 @@ public class Player{
 
     public void buyProperties(String property) {
         countProperties++;
-        properties = new String[countProperties];
-        properties[countProperties - 1] = property;
+        String[] proTemp = new String[countProperties];
+        for(int i=0; i<countProperties-1;i++){
+            proTemp[i] = properties[i];
+        }
+        proTemp[countProperties-1]= property;
+        properties = proTemp;
         if (property.charAt(0) == 'C' || property.charAt(0) == 'c') {// if the property is cinema
             cinemaOwned++;
         } else if (property.charAt(0) == 'E' || property.charAt(0) == 'e') {
