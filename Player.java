@@ -168,14 +168,14 @@ public class Player{
         if (property.charAt(0) == 'C' || property.charAt(0) == 'c') {// if the property is cinema
             cinemaOwned++;
         } else if (property.charAt(0) == 'E' || property.charAt(0) == 'e') {
-            emptyPlaceOwned++;
-            Board[] temp = new EmptyPlace[emptyPlaceOwned];
+            Board[] temp = new EmptyPlace[emptyPlaceOwned+1];
             if(emptyPlaces != null) {
                 for (int i = 0; i < emptyPlaceOwned; i++) {
                     if (emptyPlaces[i] != null)
                         temp[i] =emptyPlaces[i];
                 }
             }
+            emptyPlaceOwned++;
             temp[emptyPlaceOwned-1] = new EmptyPlace();
             temp[emptyPlaceOwned - 1].setName("emptyPlace");
             emptyPlaces = temp;

@@ -1,5 +1,4 @@
 public class EmptyPlace extends Board {
-    private int price = 100;
     private int countHouse = 0;
     private int countHotel = 0;
     private String name;

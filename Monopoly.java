@@ -412,7 +412,7 @@ public class Monopoly {
             }
             if(hasOwned){
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("What You Want To Do With Your Own Place(Build / Not Interested)");
+                System.out.println("What You Want To Do With Your Own Place(build / Not Interested)");
                 if(scanner.next().equals("build")){
                     player.buildProperties(player , emptyPlace);
                 }

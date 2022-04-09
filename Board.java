@@ -2,7 +2,10 @@ public class Board{
 
     public String[] houses;
     private boolean isOwned = false;
-
+    private int countHouse = 0;
+    private int countHotel = 0;
+    private String name;
+    private String color;
 
     public boolean getIsOwned() {
         return this.isOwned;
@@ -12,21 +15,32 @@ public class Board{
         isOwned = owned;
     }
 
-    public void setCountHouse(int countHouse){}
+    public void setCountHouse(int countHouse){
+        this.countHouse = countHouse;
+    }
 
-    public void setName(String emptyPlace){}
+    public void setName(String emptyPlace){
+        this.name = name;
+    }
 
-    public int getCountHouse(){return 0;}
+    public int getCountHouse(){return countHouse;}
 
-    public void delHouses(){};
+    public void delHouses(){
+        houses = new String[0];
+        countHouse = 0;
+    };
 
-    public void setCountHotel(int countHotel){}
+    public void setCountHotel(int countHotel){
+        this.countHouse = countHotel;
+    }
 
-    public int getCountHotel(){return 0;}
+    public int getCountHotel(){return countHotel;}
 
-    public String getColor(){return null;}
+    public String getColor(){return color;}
 
-    public void setColor(String color){};
+    public void setColor(String color){
+        this.color = color;
+    };
 }
 /* ╔═══╦════╦═══╦════╦════╦═════╦════╗
    ║ 7 ║  8 ║ 9 ║ 10 ║ 11 ║ 12  ║ 13 ║
