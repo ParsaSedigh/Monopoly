@@ -18,6 +18,10 @@ public class EmptyPlace extends Board {
         countHouse = 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public void setCountHotel(int countHotel) {
         this.countHotel = countHotel;

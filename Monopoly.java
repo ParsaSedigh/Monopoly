@@ -219,7 +219,7 @@ public class Monopoly {
                         fine += 10;
                     }
                 }
-                System.out.format("-%d For %s" , fine , player.getName());
+                System.out.format("-%d$ For %s\n" , fine , player.getName());
         }
     }
 
@@ -285,7 +285,7 @@ public class Monopoly {
         int[] diceSort = new int[array.length];
         for (int i = 0; i < array.length;) {
             int rand = new Random().nextInt();
-            System.out.format("Enter 1(Dice) For Player '%s' :" , players[i].getName());
+            System.out.format("Enter 1(Dice) For Player '%s' :\n" , players[i].getName());
             if (scanner.nextInt() == 1) {
                 diceSort[i] = (Math.abs(rand) % 5) + 1;// fill diceSort array
                 System.out.println(diceSort[i]);// show player dice
@@ -398,8 +398,7 @@ public class Monopoly {
     }
 
     public static void emptyPlace(Player player , Board emptyPlace , int emptyPlaceNumber){// 2 , 7 , 9 , 2 = 12 , 14 , 9 = 18 , 7 = 19 ,14 = 23
-        System.out.println(emptyPlace.getColor());
-        System.out.format("You are in %s place", emptyPlace.getColor());
+        System.out.format("You Are In %s Place\n" , emptyPlace.getColor());
         if(emptyPlace.getIsOwned()){
             String[] tempPlayerProperties = player.getProperties();
             String emptyPlaceToString = emptyPlaceFound(emptyPlaceNumber);
@@ -446,6 +445,7 @@ public class Monopoly {
             System.out.println("This Place Has No Owner!(buy / Not Interested):");
             if(scanner.next().equals("buy")){
                 player.buy(100);
+                System.out.println("-100$");
                 emptyPlace.setOwned(true);
                 player.buyProperties(emptyPlaceFound(emptyPlaceNumber));
                 System.out.println("What You Want To Do With Your Own Place(build / Not Interested)");
@@ -565,7 +565,7 @@ public class Monopoly {
             return;
         }
         if(Monopoly.boardHouses[player.getPosition() - 1] instanceof TaxationArea){
-            if(player.getTaxAreaTicket() > 1){
+            if(player.getTaxAreaTicket() > 0){
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("You Can Use Your Tax Ticket , Do You Want?(Y / N)");
                 if(scanner.next().equals("Y"))
@@ -573,14 +573,14 @@ public class Monopoly {
                 else {
                     int temp = player.getMoney() / 10;
                     System.out.println("You have to pay Tax!!!");
-                    System.out.format("-$%d", temp);
+                    System.out.format("-$%d\n", temp);
                     player.buy(temp);
                 }
             }
             else {
                 int temp = player.getMoney() / 10;
                 System.out.println("You have to pay Tax!!!");
-                System.out.format("-$%d", temp);
+                System.out.format("-$%d\n", temp);
                 player.buy(temp);
             }
             return;
@@ -599,7 +599,7 @@ public class Monopoly {
     public static void jailProcess(Player player){
         Scanner scanner = new Scanner(System.in);
         String jailChoice = scanner.nextLine();
-        if(player.getJailFreeTicket() > 1){
+        if(player.getJailFreeTicket() > 0){
             System.out.println("You Have A Ticket To Get Free From Jail! , Do You Want To Use it?(Y / N)");
             if(scanner.next().equals("Y")) {
                 player.setPrisoner(false);

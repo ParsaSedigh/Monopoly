@@ -4,8 +4,15 @@ public class Board{
     private boolean isOwned = false;
     private int countHouse = 0;
     private int countHotel = 0;
-    private String name;
     private String color;
+    private int number;
+
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
 
     public boolean getIsOwned() {
         return this.isOwned;
@@ -41,6 +48,7 @@ public class Board{
     public void setColor(String color){
         this.color = color;
     };
+
 }
 /* ╔═══╦════╦═══╦════╦════╦═════╦════╗
    ║ 7 ║  8 ║ 9 ║ 10 ║ 11 ║ 12  ║ 13 ║

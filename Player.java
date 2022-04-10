@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import static java.lang.String.format;
+
 public class Player{
     private String name;
     private int money;
@@ -175,8 +177,10 @@ public class Player{
             Board[] temp = new EmptyPlace[emptyPlaceOwned+1];
             if(emptyPlaces != null) {
                 for (int i = 0; i < emptyPlaceOwned; i++) {
-                    if (emptyPlaces[i] != null)
-                        temp[i] =emptyPlaces[i];
+                    if (emptyPlaces[i] != null) {
+                        temp[i] = emptyPlaces[i];
+                        temp[i].setName(emptyPlaceFound(position));
+                    }
                 }
             }
             emptyPlaceOwned++;
@@ -195,6 +199,7 @@ public class Player{
                     emptyPlace.houses[player.getHouseOwned() - 1] = "House";
                     System.out.println("House Built");
                     player.buy(150);
+                    System.out.format("-%s$\n" , "150");
                     emptyPlace.setCountHouse(houseOwned);
                 } else {
                     System.out.println("You Are Not Allowed To Build A House");
@@ -209,6 +214,7 @@ public class Player{
                     player.hotels = new String[player.getHotelsOwned()];
                     player.hotels[player.getHotelsOwned() - 1] = "Hotel";
                     player.buy(100);
+                    System.out.format("-%s$\n" , "100");
                     emptyPlace.setCountHotel(hotelsOwned);
                     System.out.println("Hotel built");
                 }
@@ -283,10 +289,11 @@ public class Player{
                 tempProperties[j]=properties[i];
                 j++;
             }
-            System.out.format("%s sold successfully", properties[tempIndex[sellChoice-1]]);
+            System.out.format("%s sold successfully\n", properties[tempIndex[sellChoice-1]]);
             cinemaOwned--;
             countProperties--;
             properties = tempProperties;
+            System.out.format("Refresh Property:\n%s" , printProperty());
 
         }else {
             if(emptyPlaceOwned==0){
@@ -294,8 +301,9 @@ public class Player{
                 return;
             }
             System.out.println("Which one do you want to sell ??");
+
             for(int i=0;i<emptyPlaceOwned;i++){
-                System.out.format("%d. %s\n", i+1,emptyPlaces[i]);
+                System.out.format("%d.%s\n", i+1, emptyPlaces[i].getName());
             }
             int sellChoice = scanner.nextInt();
             while (sellChoice<0 || sellChoice>emptyPlaceOwned){
@@ -314,7 +322,69 @@ public class Player{
             }
             emptyPlaces[sellChoice-1].setOwned(false);
             emptyPlaceOwned--;
+            delProperty(properties[sellChoice - 1]);
             emptyPlaces = temp;
         }
     }
+    public void delProperty(String property){
+        countProperties--;
+        String[] temp = new String[countProperties];
+        int indexOfDelProperty = indexOfProperty(property);
+        for (int i = 0; i < indexOfDelProperty; i++) {
+            temp[i] = properties[i];
+        }
+        for (int i = 0; i < countProperties; i++) {
+            temp[i] = properties[i];
+        }
+        properties = temp;
+        System.out.format("Refresh Property:\n%s" , printProperty());
+    }
+
+    public int indexOfProperty(String property){
+        for (int i = 0; i < countProperties; i++) {
+            if (property.equals(properties[i]))
+                return i;
+        }
+        return 0;
+    }
+
+    public String printProperty(){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < countProperties; i++) {
+            result.append(format("%d.%s\n", i + 1, properties[i]));
+        }
+        return result.toString();
+    }
+
+    public static String emptyPlaceFound(int emptyPlaceNumber){
+        String property = null;
+        switch (emptyPlaceNumber){
+            case 2:
+                property = "emptyPlace2";
+                break;
+            case 7:
+                property = "emptyPlace7";
+                break;
+            case 9:
+                property = "emptyPlace9";
+                break;
+            case 12:
+                property = "emptyPlace12";
+                break;
+            case 14:
+                property = "emptyPlace14";
+                break;
+            case 18:
+                property = "emptyPlace18";
+                break;
+            case 19:
+                property = "emptyPlace19";
+                break;
+            case 23:
+                property = "emptyPlace23";
+                break;
+        }
+        return property;
+    }
+
 }
